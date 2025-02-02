@@ -1,96 +1,105 @@
 
+---
+
+# Q2: Audio Analysis Tasks
+
+This repository contains two related tasks for **Speech Understanding** (Q2). Task A focuses on **windowing techniques** and **classification** using the UrbanSound8K dataset, while Task B examines **spectrograms** of four different genres of music from Pixabay.
 
 ---
 
-# **AudioSeal (Q1)**
+## Task A: Windowing & Classification on UrbanSound8K
 
-## **Overview**
+### Overview
+- **Goal**: Compare **Rectangular**, **Hann**, and **Hamming** windows for STFT spectrogram generation, then train a **CNN** (or another simple model) to classify the resulting features.
+- **Dataset**: [UrbanSound8K](https://urbansounddataset.weebly.com/urbansound8k.html), which comprises 8,732 audio samples across 10 classes.
 
-This folder contains code, reports, and presentation materials for **Question 1**, where we explore and evaluate **AudioSeal**—a state-of-the-art audio watermarking system designed to embed an imperceptible watermark into generated speech. The detector can then localize whether (and where) the audio was AI-generated, even after real-world edits. 
+### Files
+- **`B22AI061_Task_2A.ipynb`**  
+  - Implements:
+    1. Window demonstration (Rectangular vs. Hann vs. Hamming).  
+    2. Spectrogram/feature extraction (Mel-spectrogram or MFCC).  
+    3. CNN training & 10-fold evaluation on UrbanSound8K.
+- **`B22AI061_Task_2A_Report.pdf`**  
+  - Discusses:
+    1. Window theory & spectral leakage.  
+    2. Visual spectrogram comparisons.  
+    3. Accuracy results across folds.
 
-**Reference Paper:**  
-> **Proactive Detection of Voice Cloning with Localized Watermarking**  
-> R. Schmucker, H. Elsahar, and P. Faure. 2024.  
-> [arXiv:2401.17264](https://arxiv.org/abs/2401.17264)  
-> Code: [https://github.com/facebookresearch/audioseal](https://github.com/facebookresearch/audioseal)
+### Usage
+1. **Unzip UrbanSound8K** in the same directory:
+   ```
+   Q2/
+    ├─ UrbanSound8k/
+    │   ├─ audio/
+    │   │   ├─ fold1/
+    │   │   ├─ ...
+    │   │   └─ fold10/
+    │   └─ metadata/UrbanSound8k.csv
+    ├─ B22AI061_Task_2A.ipynb
+    ├─ B22AI061_Task_2A_Report.pdf
+    └─ ...
+   ```
+2. **Install dependencies** (e.g., `librosa`, `numpy`, `matplotlib`, `PyTorch`).
+3. **Open** `B22AI061_Task_2A.ipynb` and **run** each cell to:
+   - Load audio and generate spectrograms under each window.  
+   - Train a CNN with 10-fold cross-validation.  
+   - Compare performance metrics for each window.
 
-## **Contents of This Folder**
-
-1. **`AudioSeal_on_NPTEL_English_data.ipynb`**  
-   - Jupyter notebook demonstrating how we apply the pretrained AudioSeal generator/detector to **NPTEL** (Indian English) data.  
-   - Covers sample extraction, watermark embedding, random masking (to simulate partial watermark removal), and metric computation (PESQ, STOI, SI-SNR, detection scores).
-
-2. **`AudioSeal_on_OpenSLR_Hindi_Data.ipynb`**  
-   - Similar to the above notebook, but focuses on **OpenSLR Hindi** dataset.  
-   - Evaluates whether AudioSeal retains high imperceptibility and detection accuracy cross-lingually in Hindi data.
-
-3. **`B22AI061_Q1_AudioSeal_presentation.pdf`**  
-   - A concise slide deck summarizing **AudioSeal** and our experiments.  
-   - Highlights the main motivations, methodology, and results of applying AudioSeal to the NPTEL and Hindi datasets.
-
-4. **`B22AI061_Q1_Report_AudioSeal.pdf`**  
-   - A detailed report covering:
-     - The **task** of speech watermarking and its real-world importance.
-     - An **analysis** of AudioSeal vs. other SOTA watermarking approaches.
-     - **Experiments** (NPTEL, Hindi) with results in PESQ, STOI, SI-SNR, detection accuracy.
-     - **Discussion** of open problems, limitations, and future directions.
-
-5. **`README.md`**  
-   - This README file, containing an overview of the contents, dataset links, and references.
-
-## **Datasets**
-
-We used **two main datasets** to test AudioSeal:
-
-1. **NPTEL Indian English**  
-   - A collection of Indian English speech from lecture recordings.  
-   - Download link or GitHub reference:  
-     \[
-       \text{NPTEL Indian English Speech Dataset (NPTEL2020):} 
-       \url{https://github.com/AI4Bharat/NPTEL2020-Indian-English-Speech-Dataset}
-     \]
-
-2. **OpenSLR Hindi**  
-   - A Hindi speech dataset from the OpenSLR initiative.  
-   - Available at:  
-     \[
-       \text{OpenSLR Hindi_test:}
-       \url{http://www.openslr.org/}
-     \]
-
-
-
-## **Results Summary**
-
-- **NPTEL**:  
-  - Watermarked speech maintains PESQ ~4.44, STOI=0.998, with Detector Score ~1.0.  
-  - Even after partial masking, detection remains >0.68, indicating partial robustness.
-- **Hindi**:  
-  - Watermarked PESQ ~4.45, STOI=0.998, with Detector Score ~1.0.  
-  - Similarly, partial masking yields ~0.68 detection, confirming cross-lingual resilience.
-
-These results align with the **AudioSeal** paper’s claims of high imperceptibility and robust detection under multiple edits.
-
-## **References**
-
-- **AudioSeal Paper**:  
-  R. Schmucker, H. Elsahar, and P. Faure.  
-  “Proactive Detection of Voice Cloning with Localized Watermarking.” 2024.  
-  [arXiv:2401.17264](https://arxiv.org/abs/2401.17264).
-
-- **AudioSeal Official Code**:  
-  [https://github.com/facebookresearch/audioseal](https://github.com/facebookresearch/audioseal)
-
-- **NPTEL Indian English Speech Dataset**:  
-  [https://github.com/<YourNPTELrepo>](https://github.com/AI4Bharat/NPTEL2020-Indian-English-Speech-Dataset)
-
-- **OpenSLR Hindi\_test**:  
-  [http://www.openslr.org/](http://www.openslr.org/)
-
-## **License / Acknowledgements**
-
-- AudioSeal is published by [Meta AI Research](https://github.com/facebookresearch/audioseal).  
-- Datasets are owned by their respective publishers (NPTEL, OpenSLR).  
+### Highlights
+- Rectangular introduces more **spectral leakage**.  
+- Hann/Hamming produce smoother high-frequency regions.  
+- Modest accuracy gains (a few percentage points) often favor Hann overall.
 
 ---
 
+## Task B: Comparative Spectral Analysis of Four Songs
+
+### Overview
+- **Goal**: Select **four songs** (each from a different genre) and analyze their **spectrograms**—both the entire track and a 30-second snippet.  
+- **Sources**: [Pixabay](https://pixabay.com/music/) (free music under the Pixabay license).
+
+### Files
+- **`B22AI061_Task_2B.ipynb`**  
+  - Loads `.wav` files from four genres (Rock, Electronic/Ambient, Classical, Jazz).  
+  - Generates **full** and **snippet** spectrograms.  
+  - Computes basic metrics (Spectral Centroid, Bandwidth, Rolloff, RMS).
+- **`B22AI061_Task_2B_Report.pdf`**  
+  - Describes:
+    1. Methodology for generating spectrograms (STFT with Hann window).  
+    2. Comparative analysis of each genre’s time–frequency content.  
+    3. Observations linking these differences to fundamental speech/audio analysis.
+
+### Usage
+1. **Download** the four `.wav` files from [Drive ( Downloaded as mp3 from Pixabay then converted to wav](https://drive.google.com/drive/folders/1ijCBT2TTh6xypSrqfIC_XdHw9VBil9XB?usp=sharing) 
+2. **Open** `B22AI061_Task_2B.ipynb` in Jupyter.  
+3. **Run** each cell to:
+   - Plot **full spectrogram** and **30–60 s snippet** spectrogram for each song.  
+   - Print metrics and highlight differences in frequency balance, amplitude, etc.
+
+### Key Observations
+- **Retro City (Rock)**: Strong midrange energy, highest RMS.  
+- **SCI-FI Background (Electronic)**: Subdued amplitude, emphasis on low frequencies.  
+- **Spring Mood (Classical)**: Extended high‐frequency content, high centroid.  
+- **Vinyl (Jazz)**: Balanced brightness, moderate loudness.
+
+---
+
+## References
+
+1. **UrbanSound8K Dataset**  
+   [https://urbansounddataset.weebly.com/urbansound8k.html](https://urbansounddataset.weebly.com/urbansound8k.html)
+2. **Pixabay Music**  
+   [https://pixabay.com/music/](https://pixabay.com/music/)
+3. **GitHub code from where manual stft implementation was adopted**  
+   [GitHub](https://github.com/aluchies/stft)
+4. **Librosa Docs**  
+   [https://librosa.org/doc/latest/](https://librosa.org/doc/latest/)
+5. **Spectral Leakage Explanation** (YouTube)  
+   [https://youtu.be/tCWU9C-LdJQ](https://youtu.be/tCWU9C-LdJQ)
+6. **Matplotlib**  
+   [https://matplotlib.org/](https://matplotlib.org/)
+
+
+---
+
+**End of README**
