@@ -1,5 +1,5 @@
 
-# Audio‐Related Projects
+# CSL7770 : Speech Understanding ( By Anuj Rajan Lalla [B22AI061])
 
 This repository contains solutions for **Speech Understanding** tasks across two primary questions:  
 - **Q1: AudioSeal** — Evaluating an audio watermarking system on different speech datasets.  
