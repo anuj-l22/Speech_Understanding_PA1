@@ -82,7 +82,7 @@ These results align with the **AudioSeal** paper’s claims of high imperceptibi
   [https://github.com/facebookresearch/audioseal](https://github.com/facebookresearch/audioseal)
 
 - **NPTEL Indian English Speech Dataset**:  
-  [https://github.com/<YourNPTELrepo>](https://github.com/<YourNPTELrepo>)
+  [https://github.com/<YourNPTELrepo>](https://github.com/AI4Bharat/NPTEL2020-Indian-English-Speech-Dataset)
 
 - **OpenSLR Hindi\_test**:  
   [http://www.openslr.org/](http://www.openslr.org/)
